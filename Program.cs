@@ -1,4 +1,6 @@
-﻿public class Produto // Classe Produto que representa um produto com propriedades Id, Nome e Preco
+﻿using System.Runtime.CompilerServices;
+
+public class Produto // Classe Produto que representa um produto com propriedades Id, Nome e Preco
 {
     public int Id { get; set; }
     public string Nome { get; set; } = string.Empty;
@@ -15,13 +17,72 @@ public class Program
     static void Main()
     {
         Console.WriteLine("Sistema de produtos iniciando...");
-        Produto p = new Produto();
-        p.Id = 1;
-        p.Nome = "Teste";
-        p.Preco = 10.0;
 
+        while (true)
+        {
+            exibirMenu();
+            String opcao = Console.ReadLine() ?? string.Empty;
+
+            switch (opcao)
+            {
+                case "1":
+                    criarProduto();
+                    break;
+                case "2":
+                    listarProduto();
+                    break;
+                case "3":
+                    Console.WriteLine("Saindo do sistema...");
+                    return;
+
+                default:
+                    Console.WriteLine("Opção inválida. Tente novamente.");
+                    break;
+
+            }
+        }
+    }
+      static void exibirMenu()
+    {
+        Console.WriteLine("========MENU=========");
+        Console.WriteLine("1 - Criar Produto");
+        Console.WriteLine("2 - Listar Produtos");
+        Console.WriteLine("3 - Sair do sistema");
+        Console.Write("Escolha uma opção: ");
+    }
+
+    //CREATE 
+    static void criarProduto()
+    {
+        Console.WriteLine("Digite o nome do produto: ");
+        string nome = Console.ReadLine() ?? string.Empty;
+
+        Console.WriteLine("Digite o preço do produto: ");
+        double preco = double.Parse(Console.ReadLine() ?? "0");
+
+        // Criação do objeto
+        Produto p = new Produto();
+
+        // Preenchimento de dados
+        p.Id = idAtual++;
+        p.Nome = nome;
+        p.Preco = preco;
+
+        // Adiciona na lista  
         produtos.Add(p);
 
-        Console.WriteLine(produtos[0].Nome);
+        Console.WriteLine("Produto criado com sucesso!");
+    }
+
+
+    //READ
+    static void listarProduto()
+    {
+        Console.WriteLine("/nLista de Produtos:");
+
+        foreach (var produto in produtos)
+        {
+            Console.WriteLine($"Id: {produto.Id} | Nome: {produto.Nome} | Preço: {produto.Preco}");
+        }
     }
 }
