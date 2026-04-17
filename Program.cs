@@ -13,7 +13,6 @@ public class Program
     static List<Produto> produtos = new List<Produto>();
     static int idAtual = 1;
 
-
     static void Main()
     {
         Console.WriteLine("Sistema de produtos iniciando...");
@@ -32,6 +31,9 @@ public class Program
                     listarProduto();
                     break;
                 case "3":
+                    atualizarProduto();
+                    break;
+                case "4":
                     Console.WriteLine("Saindo do sistema...");
                     return;
 
@@ -42,12 +44,13 @@ public class Program
             }
         }
     }
-      static void exibirMenu()
+    static void exibirMenu()
     {
-        Console.WriteLine("========MENU=========");
+        Console.WriteLine("======MENU=======");
         Console.WriteLine("1 - Criar Produto");
         Console.WriteLine("2 - Listar Produtos");
-        Console.WriteLine("3 - Sair do sistema");
+        Console.WriteLine("3 - Atualizar Produto");
+        Console.WriteLine("4 - Sair do sistema");
         Console.Write("Escolha uma opção: ");
     }
 
@@ -74,7 +77,6 @@ public class Program
         Console.WriteLine("Produto criado com sucesso!");
     }
 
-
     //READ
     static void listarProduto()
     {
@@ -85,4 +87,32 @@ public class Program
             Console.WriteLine($"Id: {produto.Id} | Nome: {produto.Nome} | Preço: {produto.Preco}");
         }
     }
+
+    //UPDATE
+    static void atualizarProduto()
+    {
+        Console.WriteLine("Digite o ID do produto que deseja atualizar: ");
+        int id = int.Parse(Console.ReadLine() ?? "0");
+
+        Produto? produto = produtos.FirstOrDefault(p => p.Id == id);
+
+        if (produto != null)
+        {
+            Console.WriteLine("Novo nome: ");
+            string nome = Console.ReadLine() ?? string.Empty;
+
+            Console.WriteLine("Novo preço: ");
+            double preco = double.Parse(Console.ReadLine() ?? "0");
+
+            produto.Nome = nome;
+            produto.Preco = preco;
+
+            Console.WriteLine("Produto atualizado com sucesso!");
+        } else
+        {
+            Console.WriteLine("Produto não encontrado.");
+        }
+    }
 }
+
+
