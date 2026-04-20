@@ -34,6 +34,9 @@ public class Program
                     atualizarProduto();
                     break;
                 case "4":
+                    deletarProduto();
+                    break;
+                case "5":
                     Console.WriteLine("Saindo do sistema...");
                     return;
 
@@ -50,7 +53,8 @@ public class Program
         Console.WriteLine("1 - Criar Produto");
         Console.WriteLine("2 - Listar Produtos");
         Console.WriteLine("3 - Atualizar Produto");
-        Console.WriteLine("4 - Sair do sistema");
+        Console.WriteLine("4 - Deletar Produto");
+        Console.WriteLine("5 - Sair do sistema");
         Console.Write("Escolha uma opção: ");
     }
 
@@ -108,10 +112,33 @@ public class Program
             produto.Preco = preco;
 
             Console.WriteLine("Produto atualizado com sucesso!");
-        } else
+        }
+        else
         {
             Console.WriteLine("Produto não encontrado.");
         }
+    }
+
+    //DELETE
+    static void deletarProduto()
+    {
+        Console.WriteLine("Digite o ID do produto que seja deletar: ");
+        int id = int.Parse(Console.ReadLine() ?? "0");
+
+        Produto? produto = produtos.FirstOrDefault(p => p.Id == id);
+
+        if (produto == null)
+        {
+            Console.WriteLine("Produto não encontrado.");
+            return;
+        }
+        else
+        {
+            produtos.Remove(produto);
+            Console.WriteLine("Produto deletado com sucesso!");
+        }
+
+
     }
 }
 
