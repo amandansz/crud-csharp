@@ -7,6 +7,7 @@ public class Program
 
     static void Main()
     {
+
         Console.WriteLine("Sistema de produtos iniciando..."); while (true)
         {
             ExibirMenu();
