@@ -1,5 +1,6 @@
 ﻿using crud.Models;
 using crud.Services;
+using crud.Data;
 
 public class Program
 {
@@ -8,7 +9,26 @@ public class Program
     static void Main()
     {
 
-        Console.WriteLine("Sistema de produtos iniciando..."); while (true)
+        Console.WriteLine("Sistema de produtos iniciando...");
+
+        try
+        {
+            ConnectionFactory factory = new ConnectionFactory();
+
+            using var conexao = factory.GetConnection();
+
+            conexao.Open();
+
+            Console.WriteLine("✅ Conexão com o banco realizada com sucesso!");
+
+            conexao.Close();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"❌ Erro ao conectar: {ex.Message}");
+        }
+
+        while (true)
         {
             ExibirMenu();
             string opcao = Console.ReadLine() ?? string.Empty;

@@ -9,7 +9,7 @@ public class ConnectionFactory
         // Environment -> Classe do C# que conversa com o sistema operacional.
         //GetEnvironmentVariable -> Método que pega a variável de ambiente no sistema do windows.
 
-        string senha = Environment.GetEnvironmentVariable("DB_PASSWORD") ?? " ";
+        string senha = Environment.GetEnvironmentVariable("DB_PASSWORD") ?? "";
 
         connectionString =
           $"Server=localhost;Database=crud_produtos;Uid=root;Pwd={senha};";
