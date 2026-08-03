@@ -1,6 +1,7 @@
 ﻿using crud.Models;
 using crud.Services;
 using crud.Data;
+using System.Globalization;
 
 public class Program
 {
@@ -68,12 +69,50 @@ public class Program
         Console.Write("Nome: ");
         string nome = Console.ReadLine() ?? string.Empty;
 
-        Console.Write("Preço: ");
-        double preco = double.Parse(Console.ReadLine() ?? "0");
+        double preco = LerPrecoValido();
 
-        produtoService.Criar(nome, preco);
+        try
+        {
+            produtoService.Criar(nome, preco);
+            Console.WriteLine("Produto criado com sucesso!");
+        }
+        catch (ArgumentException ex)
+        {
+            Console.WriteLine($"Erro de validação: {ex.Message}");
+        }
+    }
 
-        Console.WriteLine("Produto criado com sucesso!");
+    static double LerPrecoValido()
+    {
+        while (true)
+        {
+            Console.Write("Preço: ");
+            string entrada = Console.ReadLine() ?? string.Empty;
+
+            bool validoCulturaAtual = double.TryParse(
+                entrada,
+                NumberStyles.Float,
+                CultureInfo.CurrentCulture,
+                out double precoCulturaAtual);
+
+            if (validoCulturaAtual)
+            {
+                return precoCulturaAtual;
+            }
+
+            bool validoInvariant = double.TryParse(
+                entrada,
+                NumberStyles.Float,
+                CultureInfo.InvariantCulture,
+                out double precoInvariant);
+
+            if (validoInvariant)
+            {
+                return precoInvariant;
+            }
+
+            Console.WriteLine("Preço inválido. Digite um número válido (ex.: 10,50 ou 10.50).");
+        }
     }
 
     static void ListarProdutos()
