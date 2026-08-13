@@ -1,11 +1,16 @@
+using crud.Data;
 using crud.Models;
 
 namespace crud.Services;
 
 public class ProdutoService
 {
-    private readonly List<Produto> produtos = new();
-    private int idAtual = 1;
+    private readonly IProdutoRepository produtoRepository;
+
+    public ProdutoService(IProdutoRepository produtoRepository)
+    {
+        this.produtoRepository = produtoRepository;
+    }
 
     public void Criar(string nome, double preco)
     {
@@ -21,17 +26,16 @@ public class ProdutoService
 
         Produto produto = new Produto
         {
-            Id = idAtual++,
             Nome = nome.Trim(),
             Preco = preco
         };
 
-        produtos.Add(produto);
+        produtoRepository.Criar(produto);
     }
 
     public List<Produto> ListarProdutos()
     {
-        return new List<Produto>(produtos);
+        return produtoRepository.ListarProdutos();
     }
 }
 
