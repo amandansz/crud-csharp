@@ -3,16 +3,18 @@ namespace crud.Data;
 
 public class ConnectionFactory
 {
-    private string connectionString;
+        private readonly string connectionString;
+
     public ConnectionFactory()
     {
-        // Environment -> Classe do C# que conversa com o sistema operacional.
-        //GetEnvironmentVariable -> Método que pega a variável de ambiente no sistema do windows.
+                string host = Environment.GetEnvironmentVariable("DB_HOST") ?? "localhost";
+                string porta = Environment.GetEnvironmentVariable("DB_PORT") ?? "3306";
+                string banco = Environment.GetEnvironmentVariable("DB_NAME") ?? "crud_produtos";
+                string usuario = Environment.GetEnvironmentVariable("DB_USER") ?? "root";
+                string senha = Environment.GetEnvironmentVariable("DB_PASSWORD") ?? "";
 
-        string senha = Environment.GetEnvironmentVariable("DB_PASSWORD") ?? "";
-
-        connectionString =
-          $"Server=localhost;Database=crud_produtos;Uid=root;Pwd={senha};";
+                connectionString =
+                    $"Server={host};Port={porta};Database={banco};Uid={usuario};Pwd={senha};";
     }
 
     public MySqlConnection GetConnection()

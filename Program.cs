@@ -5,7 +5,7 @@ using System.Globalization;
 
 public class Program
 {
-    private static ProdutoService produtoService = new ProdutoService();
+    private static ProdutoService produtoService = null!;
 
     static void Main()
     {
@@ -15,18 +15,27 @@ public class Program
         try
         {
             ConnectionFactory factory = new ConnectionFactory();
+            ProdutoRepository produtoRepository = new ProdutoRepository(factory);
 
             using var conexao = factory.GetConnection();
 
             conexao.Open();
+            produtoRepository.EnsureTabelaProdutos();
+            produtoService = new ProdutoService(produtoRepository);
 
             Console.WriteLine("✅ Conexão com o banco realizada com sucesso!");
+            Console.WriteLine("✅ Tabela de produtos pronta para uso.");
 
             conexao.Close();
         }
         catch (Exception ex)
         {
             Console.WriteLine($"❌ Erro ao conectar: {ex.Message}");
+            if (ex.InnerException is not null)
+            {
+                Console.WriteLine($"ℹ️ Detalhe técnico: {ex.InnerException.Message}");
+            }
+            return;
         }
 
         while (true)
