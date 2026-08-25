@@ -31,8 +31,12 @@ O objetivo é evoluir gradualmente uma aplicação console simples até uma apli
 ```
 crud/
 │
+├── crud.csproj
+│
 ├── Data/
-│   └── ConnectionFactory.cs
+│   ├── ConnectionFactory.cs
+│   ├── IProdutoRepository.cs
+│   └── ProdutoRepository.cs
 │
 ├── Models/
 │   └── Produto.cs
@@ -64,8 +68,8 @@ Durante este projeto estou estudando:
 - [x] CRUD em memória
 - [x] Organização do projeto
 - [x] Conexão com MySQL
-- [ ] Inserir produtos no banco
-- [ ] Listar produtos do banco
+- [x] Inserir produtos no banco
+- [x] Listar produtos do banco
 - [ ] Atualizar produtos
 - [ ] Remover produtos
 - [ ] API REST com ASP.NET Core
