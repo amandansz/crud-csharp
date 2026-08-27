@@ -70,7 +70,7 @@ Durante este projeto estou estudando:
 - [x] Conexão com MySQL
 - [x] Inserir produtos no banco
 - [x] Listar produtos do banco
-- [ ] Atualizar produtos
-- [ ] Remover produtos
+- [x] Atualizar produtos
+- [x] Remover produtos
 - [ ] API REST com ASP.NET Core
 - [ ] Interface Web
