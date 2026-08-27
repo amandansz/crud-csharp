@@ -53,6 +53,13 @@ public class Program
                     ListarProdutos();
                     break;
 
+                case "3":
+                    AtualizarProduto();
+                    break;
+
+                case "4":
+                    DeletarProduto();
+                    break;
                 case "5":
                     Console.WriteLine("Saindo do sistema...");
                     return;
@@ -69,12 +76,19 @@ public class Program
         Console.WriteLine("====== MENU ======");
         Console.WriteLine("1 - Criar Produto");
         Console.WriteLine("2 - Listar Produtos");
+        Console.WriteLine("3 - Atualizar Produto");
+        Console.WriteLine("4 - Deletar Produto");
         Console.WriteLine("5 - Sair");
         Console.Write("Escolha uma opção: ");
     }
 
     static void CriarProduto()
     {
+        if (produtoService == null)
+        {
+            Console.WriteLine("Serviço de produto não inicializado.");
+            return;
+        }
         Console.Write("Nome: ");
         string nome = Console.ReadLine() ?? string.Empty;
 
@@ -84,6 +98,44 @@ public class Program
         {
             produtoService.Criar(nome, preco);
             Console.WriteLine("Produto criado com sucesso!");
+        }
+        catch (ArgumentException ex)
+        {
+            Console.WriteLine($"Erro de validação: {ex.Message}");
+        }
+    }
+
+    static void AtualizarProduto()
+    {
+        Console.Write("Nome do produto: ");
+        string nome = Console.ReadLine() ?? string.Empty;
+        
+        double preco = LerPrecoValido();
+
+        try
+        {
+            bool atualizado = produtoService.Atualizar(nome, preco);
+            Console.WriteLine(atualizado
+                ? "Produto atualizado com sucesso!"
+                : "Nenhum produto encontrado com esse ID.");
+        }
+        catch (ArgumentException ex)
+        {
+            Console.WriteLine($"Erro de validação: {ex.Message}");
+        }
+    }
+
+        static void DeletarProduto()
+    {
+        Console.Write("Nome do produto: ");
+        string nome = Console.ReadLine() ?? string.Empty;
+
+        try
+        {
+            bool deletado = produtoService.Deletar(nome);
+            Console.WriteLine(deletado
+                ? "Produto deletado com sucesso!"
+                : "Nenhum produto encontrado com esse ID.");
         }
         catch (ArgumentException ex)
         {
