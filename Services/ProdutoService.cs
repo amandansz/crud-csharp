@@ -37,5 +37,34 @@ public class ProdutoService
     {
         return produtoRepository.ListarProdutos();
     }
+
+    public bool Atualizar(string nome, double preco)
+    {
+        ValidarProduto(nome, preco);
+        return produtoRepository.Atualizar(nome.Trim(), preco);
+    }
+
+    public bool Deletar(string nome)
+    {
+        if (string.IsNullOrWhiteSpace(nome))
+        {
+            throw new ArgumentException("O nome do produto é obrigatório.");
+        }
+
+        return produtoRepository.Deletar(nome.Trim());
+    }
+
+    private static void ValidarProduto(string nome, double preco)
+    {
+        if (string.IsNullOrWhiteSpace(nome))
+        {
+            throw new ArgumentException("O nome do produto é obrigatório.");
+        }
+
+        if (preco < 0)
+        {
+            throw new ArgumentException("O preço não pode ser negativo.");
+        }
+    }
 }
 
