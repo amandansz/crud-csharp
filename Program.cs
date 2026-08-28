@@ -117,7 +117,7 @@ public class Program
             bool atualizado = produtoService.Atualizar(nome, preco);
             Console.WriteLine(atualizado
                 ? "Produto atualizado com sucesso!"
-                : "Nenhum produto encontrado com esse nome.");
+                : "Nenhum produto encontrado com esse nome, insira um nome válido.");
         }
         catch (ArgumentException ex)
         {
@@ -135,7 +135,7 @@ public class Program
             bool deletado = produtoService.Deletar(nome);
             Console.WriteLine(deletado
                 ? "Produto deletado com sucesso!"
-                : "Nenhum produto encontrado com esse nome.");
+                : "Nenhum produto encontrado com esse nome. Cadastre um produto para começar.");
         }
         catch (ArgumentException ex)
         {
@@ -182,7 +182,7 @@ public class Program
 
         if (lista.Count == 0)
         {
-            Console.WriteLine("Nenhum produto cadastrado.");
+            Console.WriteLine("Nenhum produto cadastrado, insira um produto cadastrado.");
             return;
         }
 
