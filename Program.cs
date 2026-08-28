@@ -92,7 +92,7 @@ public class Program
         Console.Write("Nome: ");
         string nome = Console.ReadLine() ?? string.Empty;
 
-        double preco = LerPrecoValido();
+        decimal preco = LerPrecoValido();
 
         try
         {
@@ -110,14 +110,14 @@ public class Program
         Console.Write("Nome do produto: ");
         string nome = Console.ReadLine() ?? string.Empty;
         
-        double preco = LerPrecoValido();
+        decimal preco = LerPrecoValido();
 
         try
         {
             bool atualizado = produtoService.Atualizar(nome, preco);
             Console.WriteLine(atualizado
                 ? "Produto atualizado com sucesso!"
-                : "Nenhum produto encontrado com esse ID.");
+                : "Nenhum produto encontrado com esse nome.");
         }
         catch (ArgumentException ex)
         {
@@ -135,7 +135,7 @@ public class Program
             bool deletado = produtoService.Deletar(nome);
             Console.WriteLine(deletado
                 ? "Produto deletado com sucesso!"
-                : "Nenhum produto encontrado com esse ID.");
+                : "Nenhum produto encontrado com esse nome.");
         }
         catch (ArgumentException ex)
         {
@@ -143,29 +143,29 @@ public class Program
         }
     }
 
-    static double LerPrecoValido()
+    static decimal LerPrecoValido()
     {
         while (true)
         {
             Console.Write("Preço: ");
             string entrada = Console.ReadLine() ?? string.Empty;
 
-            bool validoCulturaAtual = double.TryParse(
+            bool validoCulturaAtual = decimal.TryParse(
                 entrada,
                 NumberStyles.Float,
                 CultureInfo.CurrentCulture,
-                out double precoCulturaAtual);
+                out decimal precoCulturaAtual);
 
             if (validoCulturaAtual)
             {
                 return precoCulturaAtual;
             }
 
-            bool validoInvariant = double.TryParse(
+            bool validoInvariant = decimal.TryParse(
                 entrada,
                 NumberStyles.Float,
                 CultureInfo.InvariantCulture,
-                out double precoInvariant);
+                out decimal precoInvariant);
 
             if (validoInvariant)
             {

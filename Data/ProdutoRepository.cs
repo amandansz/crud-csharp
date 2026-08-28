@@ -18,7 +18,7 @@ public class ProdutoRepository : IProdutoRepository
             CREATE TABLE IF NOT EXISTS produtos (
                 id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                 nome VARCHAR(255) NOT NULL,
-                preco DOUBLE NOT NULL
+                preco DECIMAL(10,2) NOT NULL
             );";
 
         using var conexao = connectionFactory.GetConnection();
@@ -67,7 +67,7 @@ public class ProdutoRepository : IProdutoRepository
             {
                 Id = reader.GetInt32("id"),
                 Nome = reader.GetString("nome"),
-                Preco = reader.GetDouble("preco")
+                Preco = reader.GetDecimal("preco")
             };
 
             produtos.Add(produto);
@@ -76,7 +76,7 @@ public class ProdutoRepository : IProdutoRepository
         return produtos;
     }
 
-    public bool Atualizar(string nome, double preco)
+    public bool Atualizar(string nome, decimal preco)
     {
         const string sql = "UPDATE produtos SET preco = @preco WHERE nome = @nome;";
 

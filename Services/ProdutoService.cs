@@ -12,7 +12,7 @@ public class ProdutoService
         this.produtoRepository = produtoRepository;
     }
 
-    public void Criar(string nome, double preco)
+    public void Criar(string nome, decimal preco)
     {
         if (string.IsNullOrWhiteSpace(nome))
         {
@@ -38,7 +38,7 @@ public class ProdutoService
         return produtoRepository.ListarProdutos();
     }
 
-    public bool Atualizar(string nome, double preco)
+    public bool Atualizar(string nome, decimal preco)
     {
         ValidarProduto(nome, preco);
         return produtoRepository.Atualizar(nome.Trim(), preco);
@@ -54,7 +54,7 @@ public class ProdutoService
         return produtoRepository.Deletar(nome.Trim());
     }
 
-    private static void ValidarProduto(string nome, double preco)
+    private static void ValidarProduto(string nome, decimal preco)
     {
         if (string.IsNullOrWhiteSpace(nome))
         {
