@@ -73,4 +73,14 @@ Durante este projeto estou estudando:
 - [x] Atualizar produtos
 - [x] Remover produtos
 - [ ] API REST com ASP.NET Core
+  - [ ] Criar o projeto ASP.NET Core Web API
+  - [ ] Configurar a injecao de dependencia para `ConnectionFactory`, repositorio e service
+  - [ ] Criar endpoints `GET`, `POST`, `PUT` e `DELETE` para produtos
+  - [ ] Criar DTOs e validar os dados recebidos pela API
+  - [ ] Documentar e testar os endpoints com Swagger
 - [ ] Interface Web
+  - [ ] Definir a tecnologia da interface web
+  - [ ] Criar a tela de listagem de produtos
+  - [ ] Criar formulario para cadastrar e editar produtos
+  - [ ] Adicionar acao para remover produtos
+  - [ ] Integrar a interface com a API REST
