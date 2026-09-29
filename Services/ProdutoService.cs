@@ -38,27 +38,27 @@ public class ProdutoService
         return produtoRepository.ListarProdutos();
     }
 
-    public bool Atualizar(string nome, decimal preco)
+    public bool Atualizar(int id, decimal preco)
     {
-        ValidarProduto(nome, preco);
-        return produtoRepository.Atualizar(nome.Trim(), preco);
+        ValidarProduto(id, preco);
+        return produtoRepository.Atualizar(id, preco);
     }
 
-    public bool Deletar(string nome)
+    public bool Deletar(int id)
     {
-        if (string.IsNullOrWhiteSpace(nome))
+        if (id <= 0)
         {
-            throw new ArgumentException("O nome do produto é obrigatório.");
+            throw new ArgumentException("O id do produto é obrigatório.");
         }
 
-        return produtoRepository.Deletar(nome.Trim());
+        return produtoRepository.Deletar(id);
     }
 
-    private static void ValidarProduto(string nome, decimal preco)
+    private static void ValidarProduto(int id, decimal preco)
     {
-        if (string.IsNullOrWhiteSpace(nome))
+        if (id <= 0)
         {
-            throw new ArgumentException("O nome do produto é obrigatório.");
+            throw new ArgumentException("O id do produto é obrigatório.");
         }
 
         if (preco < 0)

@@ -107,17 +107,17 @@ public class Program
 
     static void AtualizarProduto()
     {
-        Console.Write("Nome do produto: ");
-        string nome = Console.ReadLine() ?? string.Empty;
+        Console.Write("Id do produto: ");
+        int id = int.TryParse(Console.ReadLine() ?? "0", out int tempId) ? tempId : 0;
         
         decimal preco = LerPrecoValido();
 
         try
         {
-            bool atualizado = produtoService.Atualizar(nome, preco);
+            bool atualizado = produtoService.Atualizar(id, preco);
             Console.WriteLine(atualizado
                 ? "Produto atualizado com sucesso!"
-                : "Nenhum produto encontrado com esse nome, insira um nome válido.");
+                : "Nenhum produto encontrado com esse ID, insira um ID válido.");
         }
         catch (ArgumentException ex)
         {
@@ -127,15 +127,15 @@ public class Program
 
         static void DeletarProduto()
     {
-        Console.Write("Nome do produto: ");
-        string nome = Console.ReadLine() ?? string.Empty;
+        Console.Write("Id do produto: ");
+        int id = int.TryParse(Console.ReadLine() ?? "0", out int tempId) ? tempId : 0;
 
         try
         {
-            bool deletado = produtoService.Deletar(nome);
+            bool deletado = produtoService.Deletar(id);
             Console.WriteLine(deletado
                 ? "Produto deletado com sucesso!"
-                : "Nenhum produto encontrado com esse nome. Cadastre um produto para começar.");
+                : "Nenhum produto encontrado com esse ID. Cadastre um produto para começar.");
         }
         catch (ArgumentException ex)
         {

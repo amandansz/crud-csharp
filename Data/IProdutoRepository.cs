@@ -7,6 +7,6 @@ public interface IProdutoRepository
     void EnsureTabelaProdutos();
     void Criar(Produto produto);
     List<Produto> ListarProdutos();
-    bool Atualizar(string nome, decimal preco);
-    bool Deletar(string nome);
+    bool Atualizar(int id, decimal preco);
+    bool Deletar(int id);
 }

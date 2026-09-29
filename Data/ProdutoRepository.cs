@@ -76,29 +76,29 @@ public class ProdutoRepository : IProdutoRepository
         return produtos;
     }
 
-    public bool Atualizar(string nome, decimal preco)
+    public bool Atualizar(int id, decimal preco)
     {
-        const string sql = "UPDATE produtos SET preco = @preco WHERE nome = @nome;";
+        const string sql = "UPDATE produtos SET preco = @preco WHERE id = @id;";
 
         using var conexao = connectionFactory.GetConnection();
         conexao.Open();
 
         using var comando = new MySqlCommand(sql, conexao);
-        comando.Parameters.AddWithValue("@nome", nome);
+        comando.Parameters.AddWithValue("@id", id);
         comando.Parameters.AddWithValue("@preco", preco);
 
         return comando.ExecuteNonQuery() > 0;
     }
 
-    public bool Deletar(string nome)
+    public bool Deletar(int id)
     {
-        const string sql = "DELETE FROM produtos WHERE nome = @nome;";
+        const string sql = "DELETE FROM produtos WHERE id = @id;";
 
         using var conexao = connectionFactory.GetConnection();
         conexao.Open();
 
         using var comando = new MySqlCommand(sql, conexao);
-        comando.Parameters.AddWithValue("@nome", nome);
+        comando.Parameters.AddWithValue("@id", id);
 
         return comando.ExecuteNonQuery() > 0;
     }
